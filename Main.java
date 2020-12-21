@@ -18,29 +18,29 @@ public class Main {
 
     public static void main(String[] args) {
 
-        privetstvir_programmi();
+        privetstvieProgrammi();
 
-        delaem_kotov_golodnimi();//делаем котов голодными
+        setKotovGolodnimi();//делаем котов голодными
 
-        print_na_skolko_golodni_koti();//Выводим на экран на сколько голодны коты
+        printNaSkolkoGolodniKoti();//Выводим на экран на сколько голодны коты
 
         Plate plate = new Plate();//Создаём тарелку с едой
 
         plate.addFood();//добавляем в тарелку еду
 
-        kormim_kotov(plate);//кормим котов из тарелки
+        kormimKotov(plate);//кормим котов из тарелки
 
-        print_na_skolko_golodni_koti_polse_kormlenya();//Выводим на экран на сколько голодны коты после кормления
+        printNaSkolkoGolodniKotiPolseKormlenya();//Выводим на экран на сколько голодны коты после кормления
 
         plate.printInfo();//Выводим на экран сколько еды в тарелке
     }
 
-    private static void privetstvir_programmi() {
+    private static void privetstvieProgrammi() {
         System.out.println("\n---=== Практическое задание к уроку № 7 Коты и тарелка с едой ===---");
         System.out.println("                         Сделал Иван Булкин");
     }
 
-    private static void kormim_kotov(Plate plate) {
+    private static void kormimKotov(Plate plate) {
         int skolko_siel_kot = 0;
         for (int i = 0; i < catName.length; i++) {
             if (plate.food > 0) {//Выполняем только в том случае, если в тарелке есть еда
@@ -58,7 +58,7 @@ public class Main {
     }
 
     //Метод, который выводит на экран на сколько голодны коты после кормления
-    private static void print_na_skolko_golodni_koti_polse_kormlenya() {
+    private static void printNaSkolkoGolodniKotiPolseKormlenya() {
         System.out.println("После кормления: ");
         for (int i = 0; i < catName.length; i++) {
             if (catArray[i].goloden == 0) {
@@ -70,7 +70,7 @@ public class Main {
     }
 
     //Метод, который выводит на экран на сколько голодны коты
-    private static void print_na_skolko_golodni_koti() {
+    private static void printNaSkolkoGolodniKoti() {
         System.out.println("Сегодня коты хотят съесть еды: ");
         for (int i = 0; i < catName.length; i++) {
             System.out.print(catArray[i].name + ": " + catArray[i].goloden + "; ");
@@ -78,7 +78,7 @@ public class Main {
     }
 
     //Метод, который делает котов голодными
-    private static void delaem_kotov_golodnimi() {
+    private static void setKotovGolodnimi() {
         //Заполняем массив котов. Подставляем имя кота из массива имён и на случайное число в пределах NASKOLKO_GOLODEN_KOT делаем его голодным.
         //Затем случайным образом меняем котов в массиве местами, чтобы потом коты ели именно в такой очерёдности. Кто раньше встал, того и тапки
         //Сперва хотел реализовать расстановку котов на кормёжку случайным образом самостоятельно, но потом интернет выдал решение: Collections.shuffle
@@ -88,10 +88,10 @@ public class Main {
         Collections.shuffle(Arrays.asList(catArray));//случайным образом меняем котов в массиве местами
     }
 
-    private static void vibor_deistvya() {
+    private static void viborDeistvya() {
         int vibor_deistviya;
         do {
-            vibor_deistviya = vvod_tselogo_chisla(1, 2, "Покормить ещё котиков, 1 - Да, 2 - Нет.");
+            vibor_deistviya = vvodTselogoChisla(1, 2, "Покормить ещё котиков, 1 - Да, 2 - Нет.");
             if (vibor_deistviya != -100) {
             } else {
                 System.out.print("Вы ошиблись. ");
@@ -114,7 +114,7 @@ public class Main {
     //max_znachenie - больше этого числа вводить нельзя
     //возвращает -100, если число введено не верно и возвращает целое число, если число введено верно и в нужном интервале
     //message - сообщение пользователю о том, что именно надо вводить
-    private static int vvod_tselogo_chisla(int min_znachenie, int max_znachenie, String message) {
+    private static int vvodTselogoChisla(int min_znachenie, int max_znachenie, String message) {
         System.out.print(message + ", введите число от " + min_znachenie + " до " + max_znachenie + ": ");
         int vvedennoe_chislo = -100;
         if (in.hasNextInt()) {
@@ -132,7 +132,7 @@ public class Main {
     //Выходит из программы, если пользователь выбирает "y", "yes", "д", "да", "+", "торжественно подтверждаю"
     //Возвращает false, если пользователь выбирает "n", "н", "-", "играть, так играть, продолжаем"
     //продолжает спрашивать о выходе, если пользователь ввёл любое другое значение
-    private static boolean vixod_iz_programmi() {
+    private static boolean vixodIzProgrammi() {
         System.out.println("\nВыходим из программы, Вы уверены? y/n (д/н)");
         String n = in.next();
         switch (n) {
@@ -147,7 +147,7 @@ public class Main {
             }
             default -> {
                 System.out.printf("Вы ввели: " + n + ", такого значения нет в списке%n" + "Выберите y/n или д/н и попробуйте ещё разик.");
-                vixod_iz_programmi();
+                vixodIzProgrammi();
             }
         }
         return false;
