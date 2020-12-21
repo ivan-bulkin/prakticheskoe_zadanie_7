@@ -11,6 +11,9 @@ public class Plate {
     public void addFood() {
         System.out.print("\nВ тарелке было еды : " + food);
         this.food += (int) (Math.random() * RAZMER_TARELKI);
+        if (food > RAZMER_TARELKI) {
+            food = RAZMER_TARELKI;//Если хозяин пытается положить в тарелку еды больше, чем размер тарелки, то не даём ему это сделать. Ограничение - это размер тарелки RAZMER_TARELKI
+        }
         System.out.println(", после ежедневного добавления еды стало : " + food);
     }
 

@@ -1,6 +1,5 @@
 package prakticheskoe_zadanie_7;
 
-import java.time.Year;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
@@ -16,15 +15,21 @@ public class Main {
     public static Cat[] catArray = new Cat[5];//Создаём массив котов
     public static String[] catName = {"Мартин", "Матроскин", "Василий", "Фёдор", "Проглот"};//Создаём массив имён для котов new String[5]
 
+    public static Plate plate = new Plate();//Создаём тарелку с едой, создаём в этом месте, чтобы количество еды добавлялось в тарелку к еде, которая уже там есть, если они там есть(если коты всё не сожрали)
+
+    private static int kakoiDen = 1;//переменная, в которой содержится, какой день кормёжки идёт сегодня
+
     public static void main(String[] args) {
 
         privetstvieProgrammi();
 
+        viborDeistvya();
+    }
+
+    private static void teloProgrammi() {
         setKotovGolodnimi();//делаем котов голодными
 
         printNaSkolkoGolodniKoti();//Выводим на экран на сколько голодны коты
-
-        Plate plate = new Plate();//Создаём тарелку с едой
 
         plate.addFood();//добавляем в тарелку еду
 
@@ -37,7 +42,15 @@ public class Main {
 
     private static void privetstvieProgrammi() {
         System.out.println("\n---=== Практическое задание к уроку № 7 Коты и тарелка с едой ===---");
-        System.out.println("                         Сделал Иван Булкин");
+        System.out.println("                       Сделал Иван Булкин");
+        System.out.println("Максимальное количество еды в тарелке: " + RAZMER_TARELKI);
+        System.out.println("Еда в тарелке ежедневно прибаляется случайным образом(зависит от жадности хозяина тарелки).");
+        System.out.println("Если коты съели не всю еду в тарелке, то новая еда добавляется к той, что осталась после кормления котиков.");
+        System.out.println("Голод у каждого котика за ночь исчезает и появляется случайным образом снова для каждого котика.");
+        System.out.println("Голодных котиков : 5 шт.. Максимально на сколько может быть голоден котик: на " + NASKOLKO_GOLODEN_KOT + " еды.");
+        System.out.println("Кот может быть с утра не голодным: он может ночью наловить мышей и поесть или поесть на стороне или вообще целый день проспать и не есть.");
+        System.out.println("Коты подходят ежедневно к тарелке по очереди в разном порядке(кто первым встал, того и тапки).");
+        System.out.println("Если коту достаточно еды, то он: СЫТ. Если еды коту не хватило, то: кот остался голоден и пишется, сколько кот хочет ещё съесть.");
     }
 
     private static void kormimKotov(Plate plate) {
@@ -91,13 +104,15 @@ public class Main {
     private static void viborDeistvya() {
         int vibor_deistviya;
         do {
-            vibor_deistviya = vvodTselogoChisla(1, 2, "Покормить ещё котиков, 1 - Да, 2 - Нет.");
+            System.out.println("Какой уже день кормим котов: " + kakoiDen);
+            vibor_deistviya = vvodTselogoChisla(1, 2, "Покормить котиков, 1 - Да, 2 - Нет.");
             if (vibor_deistviya != -100) {
             } else {
                 System.out.print("Вы ошиблись. ");
             }
             if (vibor_deistviya == 1) {
-
+                teloProgrammi();
+                kakoiDen++;
             }
             if (vibor_deistviya == 2) {
                 System.out.println("\nДо новых встреч, ждём Вас снова.");
@@ -106,6 +121,7 @@ public class Main {
             }
         }
         while (vibor_deistviya == -100);
+        viborDeistvya();
     }
 
     //Универсальная процедура ввода целого числа, буду её использовать в других программах
